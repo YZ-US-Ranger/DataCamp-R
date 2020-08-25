@@ -74,7 +74,7 @@ diff_orig <- homes %>%
 # Randomized data under null model of independence
 The infer package will allow you to model a particular null hypothesis and then randomize the data to calculate permuted statistics. In this exercise, after specifying your null hypothesis you will permute the home ownership variable 10 times. By doing so, you will ensure that there is no relationship between home ownership and gender, so any difference in home ownership proportion for female versus male will be due only to natural variability.
 
-This exercise will demonstrate the first three steps from the infer package:
+This exercise will demonstrate the four steps from the infer package:
 
 `specify` will specify the response and explanatory variables.
 
@@ -82,10 +82,17 @@ This exercise will demonstrate the first three steps from the infer package:
 
 `generate` will generate resamples, permutations, or simulations.
 
+`calculate` will calculate summary statistics.
+
 ```
-# Perform 10 permutations
+# Perform 100 permutations
 homeown_perm <- homes %>%
   specify(HomeOwn ~ Gender, success = "Own") %>%
   hypothesize(null = "independence") %>% 
-  generate(reps = 10, type = "permute") 
+  generate(reps = 100, type = "permute") %>% 
+  calculate(stat = "diff in props", order = c("male", "female"))
+  
+# Dotplot of 100 permuted differences in proportions
+ggplot(homeown_perm, aes(x = stat)) + 
+  geom_dotplot(binwidth=0.001)  
 ```
