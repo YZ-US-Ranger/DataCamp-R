@@ -56,3 +56,18 @@ ggplot(NHANES, aes(x = SleepHrsNight, color = SleepTrouble)) +
   # Facet by HealthGen
   facet_wrap(~ HealthGen)
 ```
+# Calculating statistic of interest
+
+```
+fruits <- c("apple", "banana", "cherry")
+fruits %in% c("banana", "cherry")
+mean(fruits %in% c("banana", "cherry"))
+
+diff_orig <- homes %>%   
+  # Group by gender
+  group_by(Gender) %>%
+  # Summarize proportion of homeowners
+  summarize(prop_own = mean(HomeOwn == "Own")) %>%
+  # Summarize difference in proportion of homeowners
+  summarize(obs_diff_prop = diff(prop_own)) # male - female
+```
