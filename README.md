@@ -44,3 +44,5 @@ MedGPA_plus <- mod %>%
 ```
 
 One quick technique for jump-starting exploratory data analysis (EDA)  is to examine all of the pairwise scatterplots in your data. This can be achieved using the pairs() function. pairs(df)
+
+Use the colnames() function to list the variables included in data frame. colnames(df)
