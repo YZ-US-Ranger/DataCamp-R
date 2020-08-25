@@ -35,3 +35,10 @@ data_space +
 ```
 
 We need to tell the glm() function which member of the GLM family we want to use. To do this, we will pass the family argument to glm() as a list using the method.args argument to geom_smooth(). This mechanism is common in R, and allows one function to pass a list of arguments to another function.
+
+
+```
+# augmented model
+MedGPA_plus <- mod %>%
+  augment(type.predict = "response")
+```
