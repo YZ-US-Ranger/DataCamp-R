@@ -42,3 +42,5 @@ We need to tell the glm() function which member of the GLM family we want to use
 MedGPA_plus <- mod %>%
   augment(type.predict = "response")
 ```
+
+One quick technique for jump-starting exploratory data analysis (EDA)  is to examine all of the pairwise scatterplots in your data. This can be achieved using the pairs() function. pairs(df)
