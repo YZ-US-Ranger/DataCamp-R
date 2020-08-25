@@ -21,3 +21,17 @@ data_space +
   
 # Note that this approach has the added benefit of automatically coloring the lines appropriately to match the data.  
 ```
+
+Use geom_smooth() to add the logistic regression line
+
+```
+# scatterplot with jitter
+data_space <- ggplot(data = MedGPA, aes(y = Acceptance, x = GPA)) + 
+  geom_jitter(width = 0, height = 0.05, alpha = 0.5)
+
+# add logistic curve
+data_space +
+  geom_smooth(method = "glm", se = FALSE, method.args = list(family = "binomial"))
+```
+
+We need to tell the glm() function which member of the GLM family we want to use. To do this, we will pass the family argument to glm() as a list using the method.args argument to geom_smooth(). This mechanism is common in R, and allows one function to pass a list of arguments to another function.
