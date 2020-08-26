@@ -177,6 +177,10 @@ ex2_props <- all_polls %>%
   generate(reps = 1000, type = "bootstrap") %>% 
   calculate(stat = "prop")
 ```
+Many statistics we use in data analysis (including both the sample average and sample proportion) have nice properties that are used to better understand the population parameter(s) of interest.
+
+One such property is that if the variability of the sample proportion (called the standard error, or SE) is known, then approximately 95% of p̂  values (from different samples) will be within 2SE of the true population proportion.
+
 
 # some functions
 
