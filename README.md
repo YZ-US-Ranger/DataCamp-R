@@ -105,7 +105,7 @@ ggplot(homeown_perm, aes(x = stat)) +
   geom_density()
 ```
 
-It is important to know whether any of the randomly permuted differences were as extreme as the observed difference.
+It is important to know whether any of the randomly permuted differences were as extreme as the observed difference. Using the specify-hypothesis-generate-calculate workflow in infer, you can calculate the same statistic, but instead of getting a single number, you get a whole distribution.
 ```
 # Plot permuted differences, diff_perm
 ggplot(homeown_perm, aes(x = diff_perm)) + 
