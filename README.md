@@ -162,5 +162,7 @@ disc_perm %>%
   summarize(p_value = mean(diff_orig <= stat) * 2)
 ```
 
-`visualize` and `get_p_value` using the built in `infer` functions. Remember that the null statistics are above the original difference, so the p-value (which represents how often a null value is more extreme) is calculated by counting the number of null values which are `less` than the original difference. The small p-value indicates that the observed data are inconsistent with the null hypothesis.
+`visualize` and `get_p_value` using the built in `infer` functions. Remember that the null statistics are above the original difference, so the p-value (which represents how often a null value is more extreme) is calculated by counting the number of null values which are `less` than the original difference. The small p-value indicates that the observed data are inconsistent with the null hypothesis. 
+
+To find a two-sided p-value, you simply double the one sided p-value. That is, you want to find two times the proportion of permuted differences that are less than or equal to the observed difference.
 
