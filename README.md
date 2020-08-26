@@ -142,3 +142,12 @@ disc_perm %>%
     q.90 = quantile(stat, p = 0.9)
   )
 ```
+
+```
+# Visualize and calculate the p-value for the original dataset. visualize() and get_p_value() using the built in infer functions. 
+disc_perm %>%
+  visualize(obs_stat = diff_orig, direction = "greater")
+  
+disc_perm %>%
+  get_p_value(diff_orig, "greater")
+```
