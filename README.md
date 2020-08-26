@@ -132,3 +132,13 @@ disc %>%
   summarize(promoted_prop = mean(promote == "promoted"))
 ```
 Note that with binary variables, the proportion of either value can be found using the mean() function (e.g. mean(variable == "value")).
+
+To quantify the extreme permuted (null) differences, we use the quantile() function.
+
+```
+disc_perm %>% 
+  summarize(
+    # Find the 0.9 quantile of diff_perm's stat
+    q.90 = quantile(stat, p = 0.9)
+  )
+```
