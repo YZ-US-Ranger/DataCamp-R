@@ -151,3 +151,13 @@ disc_perm %>%
 disc_perm %>%
   get_p_value(diff_orig, "greater")
 ```
+
+```
+# Find the p-value from the original data
+disc_perm %>%
+  summarize(p_value = mean(diff_orig <= stat))
+
+# Calculate the two-sided p-value
+disc_perm %>%
+  summarize(p_value = mean(diff_orig <= stat) * 2)
+```
