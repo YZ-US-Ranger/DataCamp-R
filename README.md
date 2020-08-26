@@ -104,3 +104,17 @@ ggplot(homeown_perm, aes(x = stat)) +
 ggplot(homeown_perm, aes(x = stat)) + 
   geom_density()
 ```
+
+It is important to know whether any of the randomly permuted differences were as extreme as the observed difference.
+```
+# Plot permuted differences, diff_perm
+ggplot(homeown_perm, aes(x = diff_perm)) + 
+  # Add a density layer
+  geom_density() +
+  # Add a vline layer with intercept diff_orig
+  geom_vline(aes(xintercept = diff_orig), color = "red")
+
+# Compare permuted differences to observed difference
+homeown_perm %>%
+  summarize(n_perm_le_obs = sum(diff_perm <= diff_orig))
+```
