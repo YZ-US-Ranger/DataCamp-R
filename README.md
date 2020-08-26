@@ -166,3 +166,22 @@ disc_perm %>%
 
 To find a two-sided p-value, you simply double the one sided p-value. That is, you want to find two times the proportion of permuted differences that are less than or equal to the observed difference.
 
+# bootstrap
+
+Note that because you are looking for an interval estimate, you have not made a hypothesis claim about the proportion (thus, there is no `hypothesize` step needed in the `infer` pipeline).
+```
+ex2_props <- all_polls %>%
+  filter(poll == 1) %>%
+  select(vote) %>%
+  specify(response = vote, success = "yes") %>%
+  generate(reps = 1000, type = "bootstrap") %>% 
+  calculate(stat = "prop")
+```
+
+# some functions
+
+```
+# Combine data from both experiments
+both_ex_props <- bind_rows(ex1_props, ex2_props, .id = "experiment")
+# A dataset ID column named experiment will be created.
+```
