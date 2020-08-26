@@ -117,4 +117,18 @@ ggplot(homeown_perm, aes(x = diff_perm)) +
 # Compare permuted differences to observed difference
 homeown_perm %>%
   summarize(n_perm_le_obs = sum(diff_perm <= diff_orig))
+```  
+```  
+# Create a contingency table summarizing the data
+disc %>%
+  # Count the rows by sex, promote
+  count(sex, promote)
+
+# Find proportion of each sex who were promoted
+disc %>%
+  # Group by sex
+  group_by(sex) %>%
+  # Calculate proportion promoted summary stat
+  summarize(promoted_prop = mean(promote == "promoted"))
 ```
+Note that with binary variables, the proportion of either value can be found using the mean() function (e.g. mean(variable == "value")).
