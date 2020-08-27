@@ -181,6 +181,29 @@ Many statistics we use in data analysis (including both the sample average and s
 
 One such property is that if the variability of the sample proportion (called the standard error, or SE) is known, then approximately 95% of p̂  values (from different samples) will be within 2SE of the true population proportion. In statistics, when sd() is applied to a variable (e.g., price of house) we call it the standard deviation. When sd() is applied to a statistic (e.g., set of sample proportions) we call it the standard error.
 
+```
+# From previous exercise: bootstrap t-confidence interval
+one_poll_boot %>%
+  summarize(
+    lower = p_hat - 2 * sd(stat),
+    upper = p_hat + 2 * sd(stat)
+  )
+  
+# Manually calculate a 95% percentile interval
+one_poll_boot %>%
+  summarize(
+    lower = quantile(stat, p = .025),
+    upper = quantile(stat, p = .975)
+  )
+  
+# Calculate the same interval, more conveniently
+percentile_ci <- one_poll_boot %>% 
+  get_confidence_interval(level = 0.95)
+  
+one_poll_boot %>% 
+  # Visualize in-between the endpoints given by percentile_ci
+  visualize(endpoints=percentile_ci, direction="between")
+```
 
 # some functions
 
