@@ -224,4 +224,10 @@ rbinom(10,1,.3)
 
 # Generate 100 occurrences of flipping 10 coins, each with 30% probability
 rbinom(100,10,.3)
+
+# If you flip 10 coins each with a 30% probability of coming up heads, what is the probability exactly 2 of them are heads?
+dbinom(2,10,.3)
+
+# Calculating cumulative density of a binomial. If you flip ten coins that each have a 30% probability of heads, what is the probability at least five are heads?
+1 - pbinom(4, 10, .3)
 ```
