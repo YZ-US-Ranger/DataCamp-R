@@ -217,3 +217,11 @@ Generally, when the true parameter is close to 0.5, the standard error of p̂  i
 both_ex_props <- bind_rows(ex1_props, ex2_props, .id = "experiment")
 # A dataset ID column named experiment will be created.
 ```
+
+```
+# Generate 10 separate random flips with probability .3
+rbinom(10,1,.3)
+
+# Generate 100 occurrences of flipping 10 coins, each with 30% probability
+rbinom(100,10,.3)
+```
