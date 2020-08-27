@@ -230,4 +230,7 @@ dbinom(2,10,.3)
 
 # Calculating cumulative density of a binomial. If you flip ten coins that each have a 30% probability of heads, what is the probability at least five are heads?
 1 - pbinom(4, 10, .3)
+
+# Confirm your answer with a simulation of 10,000 trials
+mean(rbinom(10000, 10, .3) >= 5)
 ```
