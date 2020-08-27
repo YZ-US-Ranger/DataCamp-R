@@ -264,4 +264,18 @@ probability_16_fair * .99 / (probability_16_fair * .99 + probability_16_biased *
 # your choice of prior can have a pretty big effect on the final answer.
 ```
 
+```
+# Draw a random sample of 100,000 from the Binomial(1000, .2) distribution
+binom_sample <- rbinom(100000, 1000, .2)
 
+# Draw a random sample of 100,000 from the normal approximation. Remember that rnorm() takes the mean and the standard deviation, which is the square root of the variance.
+normal_sample <- rnorm(100000,1000*.2, sqrt(1000*.2*.8))
+
+# Compare the two distributions with the compare_histograms function. Remember that this takes two arguments: the first and second vectors to compare.
+compare_histograms(binom_sample, normal_sample)
+```
+
+```
+# Calculate the probability of <= 190 heads with pnorm
+pnorm(190, 200, sqrt(160))
+```
