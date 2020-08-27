@@ -218,6 +218,10 @@ both_ex_props <- bind_rows(ex1_props, ex2_props, .id = "experiment")
 # A dataset ID column named experiment will be created.
 ```
 
+
+
+# simulation
+
 ```
 # Generate 10 separate random flips with probability .3
 rbinom(10,1,.3)
@@ -235,7 +239,6 @@ dbinom(2,10,.3)
 mean(rbinom(10000, 10, .3) >= 5)
 ```
 
-# simulation
 ```
 # Simulate 100,000 flips of a coin with a 40% chance of heads
 A <- rbinom(100000,1,.4)
@@ -246,3 +249,5 @@ B <- rbinom(100000,1,.2)
 # Estimate the probability both A and B are heads
 mean(A & B)
 ```
+
+
