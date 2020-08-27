@@ -205,6 +205,11 @@ one_poll_boot %>%
   visualize(endpoints=percentile_ci, direction="between")
 ```
 
+One additional element that changes the width of the confidence interval is the sample parameter value, p̂ .
+
+Generally, when the true parameter is close to 0.5, the standard error of p̂  is larger than when the true parameter is closer to 0 or 1. When calculating a bootstrap t-confidence interval, the standard error controls the width of the CI, and here (given a true parameter of 0.8) the sample proportion is higher than in previous exercises, so the width of the confidence interval will be narrower.
+
+
 # some functions
 
 ```
