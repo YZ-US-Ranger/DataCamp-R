@@ -253,4 +253,15 @@ mean(A & B)
 mean(A | B)
 ```
 
+```
+#Suppose we see 16 heads out of 20 flips, which would normally be strong evidence that the coin is biased. However, suppose we had set a prior probability of a 99% chance that the coin is fair (50% chance of heads), and only a 1% chance that the coin is biased (75% chance of heads).
+# Use dbinom to find the probability of 16/20 from a fair or biased coin
+probability_16_fair <- dbinom(16,20,.5)
+probability_16_biased <-dbinom(16,20,.75)
+
+# Use Bayes' theorem to find the posterior probability that the coin is fair
+probability_16_fair * .99 / (probability_16_fair * .99 + probability_16_biased * .01)
+# your choice of prior can have a pretty big effect on the final answer.
+```
+
 
