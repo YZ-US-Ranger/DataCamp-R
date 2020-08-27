@@ -248,6 +248,9 @@ B <- rbinom(100000,1,.2)
 
 # Estimate the probability both A and B are heads
 mean(A & B)
+
+# Estimate the probability either A or B is heads
+mean(A | B)
 ```
 
 
