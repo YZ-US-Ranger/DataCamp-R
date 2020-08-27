@@ -234,3 +234,15 @@ dbinom(2,10,.3)
 # Confirm your answer with a simulation of 10,000 trials
 mean(rbinom(10000, 10, .3) >= 5)
 ```
+
+# simulation
+```
+# Simulate 100,000 flips of a coin with a 40% chance of heads
+A <- rbinom(100000,1,.4)
+
+# Simulate 100,000 flips of a coin with a 20% chance of heads
+B <- rbinom(100000,1,.2)
+
+# Estimate the probability both A and B are heads
+mean(A & B)
+```
