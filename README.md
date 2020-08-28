@@ -383,3 +383,29 @@ vis_miss(riskfactors, cluster = TRUE)
 # visualise and sort the columns by missingness in the `riskfactors` dataset
 vis_miss(riskfactors, sort_miss = TRUE)
 ```
+
+To get a clear picture of the missingness across variables and cases, use `gg_miss_var()` and `gg_miss_case()`. These are the visual counterpart to `miss_var_summary()` and `miss_case_summary()`.
+
+These can be split up into multiple plots with one for each category by choosing a variable to facet by.
+
+```
+# Visualize the number of missings in cases using `gg_miss_case()`
+gg_miss_case(riskfactors)
+
+# Explore the number of missings in cases using `gg_miss_case()` and facet by the variable `education`
+gg_miss_case(riskfactors, facet = education)
+
+# Visualize the number of missings in variables using `gg_miss_var()`
+gg_miss_var(riskfactors)
+
+# Explore the number of missings in variables using `gg_miss_var()` and facet by the variable `education`
+gg_miss_var(riskfactors, facet = education)
+```
+
+a few different ways to vizualise patterns of missingness using:
+
+`gg_miss_upset()` to give an overall pattern of missingness.
+
+`gg_miss_fct()` for a dataset that has a factor of interest: marriage.
+
+and `gg_miss_span()` to explore the missingness in a time series dataset.
