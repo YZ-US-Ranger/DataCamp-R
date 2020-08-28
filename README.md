@@ -419,3 +419,13 @@ miss_scan_count(data = pacman, search = list("N/A"))
 # Explore all of the strange missing values, "N/A", "missing", "na", " "
 miss_scan_count(data = pacman, search = list("N/A", "missing","na", " "))
 ```
+replace these values with missings (e.g. `NA`) using the function `replace_with_na()`.
+
+```
+# Replace the strange missing values "N/A", "na", and "missing" with `NA` for the variables, year, and score
+pacman_clean <- replace_with_na(pacman, replace = list(year = c("N/A", "na", "missing"),
+                                score = c("N/A", "na", "missing")))
+                                        
+# Test if `pacman_clean` still has these values in it?
+miss_scan_count(pacman_clean, search = list("N/A", "na", "missing"))
+```
