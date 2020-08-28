@@ -318,3 +318,23 @@ qplot(replications)
 # Use the function rgeom() to simulate 100,000 draws from a geometric distributions with probability .2
 geom_sample <- rgeom(100000, .2)
 ```
+
+# missing values
+
+When working with missing data, there are a couple of commands that you should be familiar with - firstly, you should be able to identify if there are any missing values, and where these are. Using the any_na() and are_na() tools, identify which values are missing.
+
+```
+# Create x, a vector, with values NA, NaN, Inf, ".", and "missing"
+x <- c(NA, NaN, Inf, ".", "missing")
+
+# Use any_na() and are_na() on to explore the missings
+> any_na(x)
+[1] TRUE
+> are_na(x)
+[1]  TRUE FALSE FALSE FALSE FALSE
+```
+
+You could use `are_na()` to and count up the missing values, but the most efficient way to count missings is to use the `n_miss()` function. This will tell you the total number of missing values in the data. You can then find the percent of missing values in the data with the `pct_miss` function. This will tell you the percentage of missing values in the data. You can also find the complement to these - how many complete values there are - using `n_complete` and `pct_complete`.
+
+
+
