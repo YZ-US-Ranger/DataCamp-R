@@ -368,3 +368,18 @@ miss_var_run(pedestrian, var = hourly_counts)
 # Calculate the summaries for each span of missingness, for a span of 4000, for the variable hourly_counts
 miss_var_span(pedestrian, var = hourly_counts, span_every = 4000)
 ```
+
+It can be difficult to get a handle on where the missing values are in your data, and here is where visualization can really help.
+
+The function `vis_miss()` creates an overview visualization of the missingness in the data. It also has options to cluster rows based on missingness, using `cluster = TRUE`; as well as options for sorting the columns, from most missing to least missing (`sort_miss = TRUE`).
+
+```
+# Visualize all of the missingness in the `riskfactors`  dataset
+vis_miss(riskfactors)
+
+# Visualize and cluster all of the missingness in the `riskfactors` dataset
+vis_miss(riskfactors, cluster = TRUE)
+
+# visualise and sort the columns by missingness in the `riskfactors` dataset
+vis_miss(riskfactors, sort_miss = TRUE)
+```
