@@ -429,3 +429,38 @@ pacman_clean <- replace_with_na(pacman, replace = list(year = c("N/A", "na", "mi
 # Test if `pacman_clean` still has these values in it?
 miss_scan_count(pacman_clean, search = list("N/A", "na", "missing"))
 ```
+
+Using replace_with_na scoped variants
+
+To reduce code repetition when replacing values with `NA`, use the "scoped variants" of `replace_with_na()`:
+
+`replace_with_na_at()`
+
+`replace_with_na_if()`
+
+`replace_with_na_all()`
+
+The syntax of replacement looks like this:
+
+`~.x == "N/A"`
+
+This replaces all cases that are equal to "N/A".
+
+`~.x %in% c("N/A", "missing", "na", " ")`
+
+Replaces all cases that have `"N/A"`, `"missing"`, `"na"`, or `" "`.
+
+```
+# Use `replace_with_na_at()` to replace with NA
+replace_with_na_at(pacman,
+                   .vars = c("year", "month", "day"), 
+                   ~.x %in% c("N/A", "missing", "na", " "))
+
+# Use `replace_with_na_if()` to replace with NA the character values using `is.character`
+replace_with_na_if(pacman,
+                   .predicate = is.character, 
+                   ~.x %in% c("N/A", "missing", "na", " "))
+
+# Use `replace_with_na_all()` to replace with NA
+replace_with_na_all(pacman, ~.x %in% c("N/A", "missing", "na", " "))
+```
