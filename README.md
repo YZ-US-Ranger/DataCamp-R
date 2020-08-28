@@ -336,5 +336,11 @@ x <- c(NA, NaN, Inf, ".", "missing")
 
 You could use `are_na()` to and count up the missing values, but the most efficient way to count missings is to use the `n_miss()` function. This will tell you the total number of missing values in the data. You can then find the percent of missing values in the data with the `pct_miss` function. This will tell you the percentage of missing values in the data. You can also find the complement to these - how many complete values there are - using `n_complete` and `pct_complete`.
 
+```
+# Return the summary of missingness in each variable, grouped by Month, in the `airquality` dataset
+airquality %>% group_by(Month) %>% miss_var_summary()
 
+# Return the summary of missingness in each case, grouped by Month, in the `airquality` dataset
+airquality %>% group_by(Month) %>% miss_case_summary()
+```
 
