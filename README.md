@@ -409,3 +409,13 @@ a few different ways to vizualise patterns of missingness using:
 `gg_miss_fct()` for a dataset that has a factor of interest: marriage.
 
 and `gg_miss_span()` to explore the missingness in a time series dataset.
+
+how to search for and count strange missing values?
+
+```
+# Explore the strange missing values "N/A"
+miss_scan_count(data = pacman, search = list("N/A"))
+
+# Explore all of the strange missing values, "N/A", "missing", "na", " "
+miss_scan_count(data = pacman, search = list("N/A", "missing","na", " "))
+```
