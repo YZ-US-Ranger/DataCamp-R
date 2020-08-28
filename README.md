@@ -279,3 +279,16 @@ compare_histograms(binom_sample, normal_sample)
 # Calculate the probability of <= 190 heads with pnorm
 pnorm(190, 200, sqrt(160))
 ```
+
+```
+# Simulating from a Poisson and a binomial
+
+# Draw a random sample of 100,000 from the Binomial(1000, .002) distribution
+binom_sample <- rbinom(100000,1000,.002)
+
+# Draw a random sample of 100,000 from the Poisson approximation
+poisson_sample <- rpois(100000, 2)
+
+# Compare the two distributions with the compare_histograms function
+compare_histograms(binom_sample, poisson_sample)
+```
