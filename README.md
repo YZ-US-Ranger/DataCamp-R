@@ -295,3 +295,5 @@ poisson_sample <- rpois(100000, 2)
 # Compare the two distributions with the compare_histograms function
 compare_histograms(binom_sample, poisson_sample)
 ```
+
+One of the useful properties of the Poisson distribution is that when you add multiple Poisson distributions together, the result is also a Poisson distribution.
