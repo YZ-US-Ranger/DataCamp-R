@@ -464,3 +464,18 @@ replace_with_na_if(pacman,
 # Use `replace_with_na_all()` to replace with NA
 replace_with_na_all(pacman, ~.x %in% c("N/A", "missing", "na", " "))
 ```
+
+Use the `complete()` function to make these implicit missing values explicit.
+
+```
+# Use `complete()` on the `time` and `name` variables to make implicit missing values explicit
+frogger_tidy <- frogger %>% tidyr::complete(name, time)
+```
+
+One type of missing value that can be obvious to deal with is where the first entry of a group is given, but subsequent entries are marked `NA`. These missing values often result from empty values in spreadsheets to avoid entering multiple names multiple times; as well as for "human readability". This type of problem can be solved by using the `fill()` function from the `tidyr` package.
+
+```
+# Use `fill()` to fill down the name variable in the frogger dataset
+frogger %>% fill(name)
+```
+
