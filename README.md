@@ -278,6 +278,9 @@ compare_histograms(binom_sample, normal_sample)
 ```
 # Calculate the probability of <= 190 heads with pnorm
 pnorm(190, 200, sqrt(160))
+
+# Use dpois to find the exact probability that a draw is 0. Possion(2)
+dpois(0, 2)
 ```
 
 ```
