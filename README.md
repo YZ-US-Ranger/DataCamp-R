@@ -346,3 +346,25 @@ airquality %>% group_by(Month) %>% miss_var_summary()
 airquality %>% group_by(Month) %>% miss_case_summary()
 ```
 
+
+Another way to summarise missingness is by tabulating the number of times that there are 0, 1, 2, 3, missings in a variable, or in a case.
+
+```
+# Tabulate missingness in each variable and case of the `airquality` dataset
+miss_var_table(airquality)
+miss_case_table(airquality)
+```
+
+Some summaries of missingness are particularly useful for different types of data. For example, `miss_var_span()` and `miss_var_run()`.
+
+`miss_var_span()` calculates the number of missing values in a specified variable for a repeating span. This is really useful in time series data, to look for weekly (7 day) patterns of missingness
+
+`miss_var_run()` calculates the number of "runs" or "streaks" of missingness. This is useful to find unusual patterns of missingness, for example, you might find a repeating pattern of 5 complete and 5 missings.
+
+```
+# Calculate the summaries for each run of missingness for the variable, hourly_counts
+miss_var_run(pedestrian, var = hourly_counts)
+
+# Calculate the summaries for each span of missingness, for a span of 4000, for the variable hourly_counts
+miss_var_span(pedestrian, var = hourly_counts, span_every = 4000)
+```
