@@ -314,4 +314,7 @@ replications <- replicate(100000, which(rbinom(100, 1, 0.2) == 1)[1])
 
 # Histogram the replications with qplot
 qplot(replications)
+
+# Use the function rgeom() to simulate 100,000 draws from a geometric distributions with probability .2
+geom_sample <- rgeom(100000, .2)
 ```
