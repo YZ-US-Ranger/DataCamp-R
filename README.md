@@ -574,3 +574,45 @@ model_summary %>%
 	select(imp_model,tidy) %>% 
 	unnest()
 ```
+
+## Bayesian inference
+Bayesian inference is a method for figuring out unknown or unobservable quantities given known facts. The function `prop_model` implements a Bayesian model that assumes that:
+
+The `data` is a vector of successes and failures represented by `1`s and `0`s.
+
+There is an unknown underlying proportion of success.
+
+Prior to being updated with data any underlying proportion of success is equally likely.
+
+Assume you just flipped a coin four times and the result was heads, tails, tails, heads. If you code heads as a success and tails as a failure then the following R codes runs `prop_model` with this data
+```
+data <- c(1, 0, 0, 1)
+prop_model(data)
+```
+The output of prop_model is a plot showing what the model learns about the underlying proportion of success from each data point in the order you entered them. At n=0 there is no data, and all the model knows is that it's equally probable that the proportion of success is anything from 0% to 100%. At n=4 all data has been added, and the model knows a little bit more. In addition to producing a plot, `prop_model` also returns a large random sample from the posterior over the underlying proportion of success.
+
+```
+data = c(1, 0, 0, 1, 0, 0,
+         0, 0, 0, 0, 0, 0, 0)
+
+# Extract and explore the posterior
+posterior <- prop_model(data)
+head(posterior) # currently contain 10,000 samples (the default of prop_model).
+
+# Edit the histogram
+hist(posterior, breaks=30,xlim = c(0, 1),col = "palegreen4")
+
+# to make it smoother.
+# to make it cover the whole range of possible proportions from 0 to 1.
+# to give it a color
+
+# Calculate the median
+median(posterior)
+
+# Calculate the credible interval
+quantile(posterior, c(0.05, 0.95))
+
+# Calculate the probability
+sum(posterior > 0.07) / length(posterior)
+```
+`quantile()` takes the vector of samples as its first argument and the second argument is a vector defining how much probability should be left below and above the CI. For example, the vector `c(0.05, 0.95)` would yield a 90% CI and `c(0.25, 0.75)` would yield a 50% CI.
