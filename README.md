@@ -517,3 +517,60 @@ bind_shadow(oceanbuoys) %>%
   geom_miss_point() + 
   facet_grid(humidity_NA~year)
 ```
+
+```
+# Impute and track data with `bind_shadow`, `impute_below_all`, and `add_label_shadow`
+ocean_imp_track <- bind_shadow(oceanbuoys) %>% 
+  impute_below_all() %>% 
+  add_label_shadow()
+  
+# Impute the mean value and track the imputations 
+ocean_imp_mean <- bind_shadow(oceanbuoys) %>% 
+  impute_mean_all() %>% 
+  add_label_shadow()
+```
+
+how to explore variation across many variables and their missingness
+
+```
+# Gather the imputed data 
+ocean_imp_mean_gather <- shadow_long(ocean_imp_mean,
+                                     humidity,
+                                     air_temp_c)
+# Inspect the data
+ocean_imp_mean_gather
+
+# Explore the imputations in a histogram 
+ggplot(ocean_imp_mean_gather, 
+       aes(x = value, fill = value_NA)) + 
+  geom_histogram() + 
+  facet_wrap(~variable)
+```
+
+
+There are many imputation packages in R. We are going to focus on using the `simputation` package, which provides a simple, powerful interface into performing imputations.
+
+```
+# Impute humidity and air temperature using wind_ew and wind_ns, and track missing values
+ocean_imp_lm_wind <- oceanbuoys %>% 
+    bind_shadow() %>%
+    impute_lm(air_temp_c ~ wind_ew + wind_ns) %>% 
+    impute_lm(humidity ~ wind_ew + wind_ns) %>%
+    add_label_shadow()
+```
+
+```
+# Create the model summary for each dataset
+model_summary <- bound_models %>% 
+  group_by(imp_model) %>%
+  nest() %>%
+  mutate(mod = map(data, ~lm(sea_temp_c ~ air_temp_c + humidity + year, data = .)),
+         res = map(mod, residuals),
+         pred = map(mod, predict),
+         tidy = map(mod, tidy))
+
+# Explore the coefficients in the model
+model_summary %>% 
+	select(imp_model,tidy) %>% 
+	unnest()
+```
