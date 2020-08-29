@@ -478,4 +478,42 @@ One type of missing value that can be obvious to deal with is where the first en
 # Use `fill()` to fill down the name variable in the frogger dataset
 frogger %>% fill(name)
 ```
+One way to help expose missing values is to change the way we think about the data - by thinking about every single data value being missing or not missing. The `as_shadow()` function in R transforms a dataframe into a shadow matrix, a special data format where the values are either missing (`NA`), or Not Missing (`!NA`). The column names of a shadow matrix are the same as the data, but have a suffix added `_NA`. This is a useful first step in more advanced summaries of missing data.
 
+```
+# Create shadow matrix data with `as_shadow()`
+as_shadow(oceanbuoys)
+
+# Create nabular data by binding the shadow to the data with `bind_shadow()`
+bind_shadow(oceanbuoys)
+
+# Bind only the variables with missing values by using bind_shadow(only_miss = TRUE)
+bind_shadow(oceanbuoys, only_miss = TRUE)
+```
+Let's calculate summary statistics based on the missingness of another variable.
+To do this we are going to use the following steps:
+
+First, `bind_shadow()` turns the data into nabular data.
+
+Next, perform some summaries on the data using `group_by()` and `summarise()` to calculate the mean and standard deviation, using the `mean()` and `sd()` functions.
+```
+# `bind_shadow()` and `group_by()` humidity missingness (`humidity_NA`)
+oceanbuoys %>%
+  bind_shadow() %>%
+  group_by(humidity_NA) %>% 
+  summarise(wind_ew_mean = mean(wind_ew), # calculate mean of wind_ew
+            wind_ew_sd = sd(wind_ew)) # calculate standard deviation of wind_ew
+```
+
+Missing values in a scatterplot in `ggplot2` are removed by default, with a warning.
+
+We can display missing values in a scatterplot, using `geom_miss_point()` - a special `ggplot2` geom that shifts the missing values into the plot, displaying them 10% below the minimum of the variable.
+
+```
+# Use geom_miss_point() and facet_grid to explore how the missingness in wind_ew and air_temp_c is different for missingness of humidity AND by year - by using `facet_grid(humidity_NA ~ year)`
+bind_shadow(oceanbuoys) %>%
+  ggplot(aes(x = wind_ew,
+             y = air_temp_c)) + 
+  geom_miss_point() + 
+  facet_grid(humidity_NA~year)
+```
