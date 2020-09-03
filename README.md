@@ -66,6 +66,13 @@ ggplot(viz_website_2017_like_sum,
   scale_y_continuous(limits = c(0, 1), labels = percent)
 ```
 
+```
+ggplot(viz_website_2018_01_sum,
+       aes(x =condition, y = like_conversion_rate)) +
+  geom_bar(stat = "identity") +
+  scale_y_continuous(limits = c(0, 1), labels = percent)
+```
+Here use `stat = "identity"` so it plots our computed values, rather than make bars of counts.
 
 
 # Calculating statistic of interest
