@@ -56,6 +56,18 @@ ggplot(NHANES, aes(x = SleepHrsNight, color = SleepTrouble)) +
   # Facet by HealthGen
   facet_wrap(~ HealthGen)
 ```
+
+```
+# Plot 'like' click summary by month
+ggplot(viz_website_2017_like_sum,
+       aes(x = month, y = like_conversion_rate, group = 1)) +
+  geom_point() +
+  geom_line() +
+  scale_y_continuous(limits = c(0, 1), labels = percent)
+```
+
+
+
 # Calculating statistic of interest
 
 ```
