@@ -102,6 +102,10 @@ diff_orig <- homes %>%
   # Summarize difference in proportion of homeowners
   summarize(obs_diff_prop = diff(prop_own)) # male - female
 ```
+
+Unless you tell R otherwise, R will do operations like this alphabetically, so -0.09964612 is the proportion of (f)emales that favor minus the proportion of (m)ales.
+
+
 # Randomized data under null model of independence
 The infer package will allow you to model a particular null hypothesis and then randomize the data to calculate permuted statistics. In this exercise, after specifying your null hypothesis you will permute the home ownership variable 10 times. By doing so, you will ensure that there is no relationship between home ownership and gender, so any difference in home ownership proportion for female versus male will be due only to natural variability.
 
@@ -135,6 +139,9 @@ ggplot(homeown_perm, aes(x = stat)) +
 ggplot(homeown_perm, aes(x = stat)) + 
   geom_density()
 ```
+
+you specify the order of the difference by adding an argument, `order = c("FIRST", "SECOND")`, where first and second refer to the group names. This results in the calculation: FIRST - SECOND.
+
 
 It is important to know whether any of the randomly permuted differences were as extreme as the observed difference. Using the specify-hypothesis-generate-calculate workflow in infer, you can calculate the same statistic, but instead of getting a single number, you get a whole distribution.
 ```
@@ -196,6 +203,31 @@ disc_perm %>%
 `visualize` and `get_p_value` using the built in `infer` functions. Remember that the null statistics are above the original difference, so the p-value (which represents how often a null value is more extreme) is calculated by counting the number of null values which are `less` than the original difference. The small p-value indicates that the observed data are inconsistent with the null hypothesis. 
 
 To find a two-sided p-value, you simply double the one sided p-value. That is, you want to find two times the proportion of permuted differences that are less than or equal to the observed difference.
+
+```
+# From previous step
+alpha <- 0.05
+upper <- null %>%
+  summarize(u = quantile(stat, probs = 1 - alpha / 2)) %>%
+  pull()
+lower <- null %>%
+  summarize(l = quantile(stat, probs = alpha / 2)) %>%
+  pull()
+  
+# Visualize cutoffs
+ggplot(null, aes(x = stat)) +
+  geom_density() +
+  geom_vline(xintercept = d_hat, color = "red") +
+  # Add vertical blue line for lower cutoff
+  geom_vline(xintercept = lower, color = "blue") +
+  # Add vertical blue line for upper cutoff
+  geom_vline(xintercept = upper, color = "blue")
+```
+
+
+
+
+
 
 # bootstrap
 
