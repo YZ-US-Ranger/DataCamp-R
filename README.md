@@ -721,3 +721,9 @@ Obs %>%
   # Expand out the counts
   uncount(n)
 ```
+
+```
+# Compute chi-squared stat
+gss_party %>%
+  chisq_stat(natarms ~ party)
+```
