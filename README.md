@@ -727,3 +727,19 @@ Obs %>%
 gss_party %>%
   chisq_stat(natarms ~ party)
 ```
+
+```
+# Create null that natarms and party are indep
+null_arms <- gss_party %>%
+  specify(natarms~party) %>%
+  hypothesize(null = "independence") %>%
+  generate(reps = 500, type = "permute") %>%
+  calculate(stat = "Chisq")
+  
+# Visualize null
+ggplot(null_arms, aes(x = stat)) +
+  # Add density layer
+  geom_density() +
+  # Add vertical red line at obs stat
+  geom_vline(xintercept = chi_obs_arms, color = "red")
+```
