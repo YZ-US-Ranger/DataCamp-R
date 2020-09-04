@@ -208,7 +208,7 @@ ex2_props <- all_polls %>%
   generate(reps = 1000, type = "bootstrap") %>% 
   calculate(stat = "prop")
 ```
-This function reduces your data frame to just two columns: one for the "stat"s and another for the "replicate" they correspond to. When you plot your bootstrap distribution, you'll find that it's bell-shaped. It's this shape that allows you to add and subtract two SEs to get a 95% interval.
+This function reduces your data frame to just two columns: one for the "stat"s and another for the "replicate" they correspond to. When you plot your bootstrap distribution, you'll find that it's bell-shaped. It's this shape that allows you to add and subtract two SEs to get a 95% interval. SEs are highest when estimating proportions are close to 0.5. (or when n is small)
 
 
 Many statistics we use in data analysis (including both the sample average and sample proportion) have nice properties that are used to better understand the population parameter(s) of interest.
@@ -243,6 +243,30 @@ One additional element that changes the width of the confidence interval is the 
 
 Generally, when the true parameter is close to 0.5, the standard error of p̂  is larger than when the true parameter is closer to 0 or 1. When calculating a bootstrap t-confidence interval, the standard error controls the width of the CI, and here (given a true parameter of 0.8) the sample proportion is higher than in previous exercises, so the width of the confidence interval will be narrower.
 
+```
+# point null hypothesis that the population proportion has a value of 0.75.
+null <- gss2016 %>%
+  specify(response = postlife, success = "YES") %>%
+  hypothesize(null = "point", p = 0.75) %>%
+  generate(reps = 500, type = "simulate") %>%
+  calculate(stat = "prop")
+  
+# Visualize null distribution
+ggplot(null, aes(stat)) +
+  # Add density layer
+  geom_density() +
+  # Add line at observed
+  geom_vline(xintercept = p_hat, color = "red")
+  
+null %>%
+  summarize(
+    # Compute the one-tailed p-value
+    one_tailed_pval = mean(stat >= p_hat),
+    # Compute the two-tailed p-value
+    two_tailed_pval = 2 * one_tailed_pval
+  ) %>%
+  pull(two_tailed_pval)
+```
 
 # some functions
 
