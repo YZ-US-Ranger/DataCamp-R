@@ -73,7 +73,19 @@ ggplot(viz_website_2018_01_sum,
   scale_y_continuous(limits = c(0, 1), labels = percent)
 ```
 Here use `stat = "identity"` so it plots our computed values, rather than make bars of counts.
-
+```
+# Plot 'like' conversion rates by date for experiment
+ggplot(viz_website_2018_02_sum,
+       aes(x = visit_date,
+           y = like_conversion_rate,
+           color = condition,
+           linetype = article_published,
+           group = interaction(condition, article_published))) +
+  geom_point() +
+  geom_line() +
+  geom_vline(xintercept = as.numeric(as.Date("2018-02-15"))) +
+  scale_y_continuous(limits = c(0, 0.3), labels = percent)
+```
 
 # Calculating statistic of interest
 
