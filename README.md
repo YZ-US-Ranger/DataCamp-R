@@ -706,3 +706,18 @@ quantile(posterior, c(0.05, 0.95))
 sum(posterior > 0.07) / length(posterior)
 ```
 `quantile()` takes the vector of samples as its first argument and the second argument is a vector defining how much probability should be left below and above the CI. For example, the vector `c(0.05, 0.95)` would yield a 90% CI and `c(0.25, 0.75)` would yield a 50% CI.
+
+## create a contingency table to display counts
+```
+# From previous step
+Obs <- gss_party %>%
+  select(natspac, party) %>%
+  table()
+  
+# Convert table back to tidy df
+Obs %>%
+  # Tidy the table
+  tidy() %>%
+  # Expand out the counts
+  uncount(n)
+```
