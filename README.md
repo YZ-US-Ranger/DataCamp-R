@@ -743,3 +743,18 @@ ggplot(null_arms, aes(x = stat)) +
   # Add vertical red line at obs stat
   geom_vline(xintercept = chi_obs_arms, color = "red")
 ```
+```
+# From previous step
+null <- gss2016 %>%
+  specify(happy ~ region, success = "HAPPY") %>%
+  hypothesize(null = "independence") %>%
+  generate(reps = 500, type = "permute") %>%
+  calculate(stat = "Chisq")
+  
+# Calculate computational pval
+null %>%
+  summarize(pval = mean(chi_obs<=stat))
+
+# Calculate approximate pval
+pchisq(chi_obs, df = 3, lower.tail = FALSE)
+```
