@@ -308,6 +308,33 @@ both_ex_props <- bind_rows(ex1_props, ex2_props, .id = "experiment")
 # A dataset ID column named experiment will be created.
 ```
 
+```
+# From previous step
+totals <- iran %>%
+  summarize(ahmadinejad = sum(ahmadinejad),
+            rezai = sum(rezai),
+            karrubi = sum(karrubi),
+            mousavi = sum(mousavi))
+
+# Gather data
+gathered_totals <- totals %>%
+  gather(key = "candidate", value = "votes")
+
+# A tibble: 1 x 4
+  ahmadinejad  rezai karrubi  mousavi
+        <dbl>  <dbl>   <dbl>    <dbl>
+1    24515209 659281  328979 13225330
+
+# Inspect gathered totals
+gathered_totals
+# A tibble: 4 x 2
+  candidate      votes
+  <chr>          <dbl>
+1 ahmadinejad 24515209
+2 rezai         659281
+3 karrubi       328979
+4 mousavi     13225330
+```
 
 
 # simulation
