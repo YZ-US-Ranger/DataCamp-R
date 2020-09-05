@@ -805,3 +805,29 @@ null <- iran %>%
   # Calculate statistics
   calculate(stat = "Chisq")
 ```
+
+```
+# Compute degrees of freedom
+degrees_of_freedom <- iran %>%
+  # Pull out first_digit vector
+  pull("first_digit") %>% 
+  # Calculate n levels and subtract 1
+  nlevels()-1
+
+# Plot both null dists
+ggplot(null, aes(stat)) +
+  # Add density layer
+  geom_density()  +
+  # Add vertical line at obs stat
+  geom_vline(xintercept = chi_obs_stat) +
+  # Overlay chisq approx
+  stat_function(fun = dchisq, args = list(df = degrees_of_freedom), color = "blue")
+  
+# Permutation p-value.
+null %>%
+  summarize(pval = mean(stat>chi_obs_stat))
+  
+# Approximation p-value
+pchisq(chi_obs_stat, df = degrees_of_freedom, lower.tail = FALSE)
+```
+Compute the permutation p-value by summarizing the statistics with the proportion that are greater than the observed statistic. Compute the approximation p-value using the `pchisq()` function. Recall that this will return the area under the curve to the left of the observed value, so you'll need to modify it to return the right tail. Although they are very similar here, you'd be slightly better off using your computational p-value. The approximation becomes less accurate when cell counts are low, as they are here.
