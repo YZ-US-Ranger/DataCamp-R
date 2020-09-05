@@ -785,3 +785,23 @@ null %>%
 # Calculate approximate pval
 pchisq(chi_obs, df = 3, lower.tail = FALSE)
 ```
+
+```
+# Inspect p_benford
+p_benford
+
+# Compute observed stat
+chi_obs_stat <- iran %>%
+  chisq_stat(response = first_digit, p = p_benford)
+
+# Form null distribution
+null <- iran %>%
+  # Specify the response
+  specify(response = first_digit) %>%
+  # Set up the null hypothesis
+  hypothesize(null = "point", p = p_benford) %>%
+  # Generate 500 reps
+  generate(reps = 500, type = "simulate") %>%
+  # Calculate statistics
+  calculate(stat = "Chisq")
+```
