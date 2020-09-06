@@ -734,6 +734,27 @@ sum(posterior > 0.07) / length(posterior)
 ```
 `quantile()` takes the vector of samples as its first argument and the second argument is a vector defining how much probability should be left below and above the CI. For example, the vector `c(0.05, 0.95)` would yield a 90% CI and `c(0.25, 0.75)` would yield a 50% CI.
 
+```
+# Sample 10000 draws from Beta(45,55) prior
+prior_A <- rbeta(n = 10000, shape1 = 45, shape2 = 55)
+
+# Store the results in a data frame
+prior_sim <- data.frame(prior_A)
+
+# Construct a density plot of the prior sample
+ggplot(prior_sim, aes(x = prior_A)) + 
+    geom_density()
+```
+The Beta(a,b) distribution is defined on the interval from 0 to 1, thus provides a natural and flexible prior for your underlying election support, p. You can tune the Beta shape parameters a and b to produce alternative prior models. 
+
+```
+# Combine the results in a single data frame
+prior_sim <- data.frame(samples = c(prior_A, prior_B, prior_C),
+        priors = rep(c("A","B","C"), each = 10000))
+```
+
+
+
 ## create a contingency table to display counts
 ```
 # From previous step
