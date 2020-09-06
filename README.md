@@ -393,6 +393,16 @@ compare_histograms(binom_sample, normal_sample)
 ```
 
 ```
+# Take 10000 samples from the a, b, & s priors
+a <- rnorm(10000, 0, 200)
+b <- rnorm(10000, 1, .5)
+s <- runif(10000, 0, 20)
+
+# Store samples in a data frame
+samples <- data.frame(set = 1:10000, a, b, s)
+```
+
+```
 # Calculate the probability of <= 190 heads with pnorm
 pnorm(190, 200, sqrt(160))
 
@@ -852,3 +862,5 @@ null %>%
 pchisq(chi_obs_stat, df = degrees_of_freedom, lower.tail = FALSE)
 ```
 Compute the permutation p-value by summarizing the statistics with the proportion that are greater than the observed statistic. Compute the approximation p-value using the `pchisq()` function. Recall that this will return the area under the curve to the left of the observed value, so you'll need to modify it to return the right tail. Although they are very similar here, you'd be slightly better off using your computational p-value. The approximation becomes less accurate when cell counts are low, as they are here.
+
+
