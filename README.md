@@ -86,6 +86,14 @@ ggplot(viz_website_2018_02_sum,
   geom_vline(xintercept = as.numeric(as.Date("2018-02-15"))) +
   scale_y_continuous(limits = c(0, 0.3), labels = percent)
 ```
+```
+# Visualize the credible interval on a scatterplot of the data
+ggplot(bdims, aes(x = hgt, y = wgt)) + 
+    geom_point() + 
+    geom_abline(intercept = mean(weight_chains$a), slope = mean(weight_chains$b), color = "red") + 
+    geom_segment(x = 180, xend = 180, y = ci_180[1], yend = ci_180[2], color = "red")
+```
+		
 
 # Calculating statistic of interest
 
