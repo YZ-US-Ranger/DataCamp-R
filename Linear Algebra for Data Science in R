@@ -57,3 +57,20 @@ M_3 <- cbind(M_2, rep(-1, 13))
 # Change the element in the lower-right corner of the matrix
 M_3[13, 13] <- 1
 ```
+
+use the Moore-Penrose generalized inverse in the `MASS' package and find that it produces the regular inverse if the matrix you're working with is already invertible!
+The command `ginv()` computes the Moore-Penrose generalized inverse in R.
+
+## Eigenvalues and Eigenvectors
+
+```
+> A
+     [,1] [,2] [,3]
+[1,]   -1    2    4
+[2,]    0    7   12
+[3,]    0    0   -4
+
+# Show that 7 is an eigenvalue for A
+A%*%c(0.2425356, 0.9701425, 0) - 7*c(0.2425356, 0.9701425, 0)
+```
+Note that there are often rounding errors that occur in R and, in this case, what you're seeing is an approximation of the zero vector.
