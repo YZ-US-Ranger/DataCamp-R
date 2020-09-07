@@ -74,3 +74,22 @@ The command `ginv()` computes the Moore-Penrose generalized inverse in R.
 A%*%c(0.2425356, 0.9701425, 0) - 7*c(0.2425356, 0.9701425, 0)
 ```
 Note that there are often rounding errors that occur in R and, in this case, what you're seeing is an approximation of the zero vector.
+
+```
+> A
+     [,1] [,2]
+[1,]    1    2
+[2,]    1    1
+
+# Compute the eigenvalues of A and store in Lambda
+Lambda <- eigen(A)
+
+# Print eigenvalues
+print(Lambda$values[1])
+print(Lambda$values[2])
+
+# Verify that these numbers satisfy the conditions of being an eigenvalue
+det(Lambda$values[1]*diag(2) - A)
+det(Lambda$values[2]*diag(2) - A)
+```
+the eigenvalues λ of a matrix A, and show that they satisfy the property that the matrix λI−A is not invertible, with determinant equal to zero.
