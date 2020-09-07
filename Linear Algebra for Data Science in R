@@ -93,3 +93,13 @@ det(Lambda$values[1]*diag(2) - A)
 det(Lambda$values[2]*diag(2) - A)
 ```
 the eigenvalues λ of a matrix A, and show that they satisfy the property that the matrix λI−A is not invertible, with determinant equal to zero.
+
+```
+# Print eigenvectors
+print(Lambda$vectors[, 1])
+print(Lambda$vectors[, 2])
+
+# Verify that these eigenvectors & their associated eigenvalues satisfy Av - lambda v = 0
+Lambda$values[1]*Lambda$vectors[, 1] - A%*%Lambda$vectors[, 1]
+Lambda$values[2]*Lambda$vectors[, 2] - A%*%Lambda$vectors[, 2]
+```
