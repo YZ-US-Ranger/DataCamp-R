@@ -46,3 +46,14 @@ solve(diag(2))
 # Take the inverse of the matrix A
 Ainv <- solve(A)
 ```
+
+```
+# Add a row of 1's
+M_2 <- rbind(M, 1)
+
+# Add a column of -1's 
+M_3 <- cbind(M_2, rep(-1, 13))
+
+# Change the element in the lower-right corner of the matrix
+M_3[13, 13] <- 1
+```
