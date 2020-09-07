@@ -127,3 +127,12 @@ B[1, 2]
 B[2, 1]
 cov(A[, 1], A[, 2])
 ```
+When dealing with data that has features with different scales, it's often important to scale the data first. This is because data that has larger values may sway the data even with relatively little variability.
+
+```
+# Scale columns 5-12 of combine
+B <- scale(combine[, 5:12])
+
+# Summarize the principal component analysis
+summary(prcomp(B))
+```
