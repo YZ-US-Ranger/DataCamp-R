@@ -112,3 +112,18 @@ A <- as.matrix(A)
 # Subtract the mean of each column
 A[, 1] <- A[, 1] - mean(A[, 1])
 ```
+
+the structure of the variance-covariance matrix of a dataset.
+```
+# Create matrix B from equation in instructions
+B <- t(A)%*%A/(nrow(A) - 1)
+
+# Compare 1st element of the 1st column of B to the variance of the first column of A
+B[1,1]
+var(A[, 1])
+
+# Compare 1st element of 2nd column of B to the 1st element of the 2nd row of B to the covariance between the first two columns of A
+B[1, 2]
+B[2, 1]
+cov(A[, 1], A[, 2])
+```
