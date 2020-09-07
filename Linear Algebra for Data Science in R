@@ -103,3 +103,4 @@ print(Lambda$vectors[, 2])
 Lambda$values[1]*Lambda$vectors[, 1] - A%*%Lambda$vectors[, 1]
 Lambda$values[2]*Lambda$vectors[, 2] - A%*%Lambda$vectors[, 2]
 ```
+Why does R display the eigenvalues in descending order of size? The more the matrix is applied, the higher the influence of the largest eigenvalues.
